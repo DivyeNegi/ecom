@@ -1,0 +1,26 @@
+{% extends "base/accounts.html" %}
+
+{% block title %}Register Name{% endblock %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <a href="/" class="link-underline-primary">
+        <img class="mb-4" src="/media/images/logo.png" alt="" width="72" height="72">
+    </a>
+    <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+
+    {% include "base/alerts.html" %}
+    <div class="form-floating my-3">
+        <input type="text" required class="form-control" id="floatingInput" placeholder="John" name="first_name">
+        <label for="floatingInput">First Name</label>
+    </div>
+    <div class="form-floating my-3">
+        <input type="text" required class="form-control" id="floatingInput" placeholder="Doe" name="last_name">
+        <label for="floatingInput">Last Name</label>
+    </div>
+    <button class="btn btn-primary w-100 my-2" type="submit">Sign up</button>
+</form>
+
+{% endblock %}

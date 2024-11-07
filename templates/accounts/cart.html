@@ -1,0 +1,77 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+
+{% block content %}
+
+<main class="justify-content-center d-flex flex-column">
+  <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary">
+    <div class="col-md-6 p-lg-5 mx-auto my-5">
+      {% if cart %}
+      <h1 class="display-3 fw-bold">Your Cart</h1>
+      <h3 class="fw-normal text-muted mt-4">Review your cart and Checkout!</h3>
+      {% else %}
+      <h1 class="display-3 fw-bold">Your Cart is empty!</h1>
+      <h3 class="fw-normal text-muted mt-4">Add products in your cart and Checkout!</h3>
+      {% endif %}
+    </div>
+    <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+  </div>
+  {% if cart %}
+
+  <div class="card text-center col-md-8 mx-auto d-flex flex-column justify-content-around">
+    {% for cartItem in cart.cart_items.all %}
+    <div class="row d-flex align-items-center justify-content-center px-auto">
+      <div class="col-md-4">
+        <img src="/media/{{cartItem.product.product_images.first.image}}" width="250" height="250"
+          class="img-fluid rounded-start m-2" alt="...">
+      </div>
+      <div class="col-md-7 d-flex flex-column align-items-center mt-2">
+        <div class="card-header col-md-12 my-2">
+          {{cartItem.product.product_name}}
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-2">
+            <p>{{cartItem.storage.storage_title}} + {{cartItem.color.color_title}}</p>
+            <p class="blockquote-footer my-1">Want to add more of these? <cite title="Source Title"><a
+                  href="/product/{{cartItem.product.slug}}">Click Here!</a></cite></p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <!-- {% if not forloop.last %}
+    <hr class="">
+    {% endif %} -->
+    {% endfor %}
+
+    <a href="/accounts/clearcart" class="add-to-cart mb-3 d-flex col-md-2 btn btn-success justify-content-center align-self-center align-items-center text-center "
+      type="button">
+
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus m-1"
+        viewBox="0 0 16 16">
+        <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z" />
+        <path
+          d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+      </svg>
+      <span class="m-1">
+        Clear Cart
+      </span>
+    </a>
+
+
+  </div>
+
+
+  {% endif %}
+
+</main>
+
+
+
+{% endblock %}

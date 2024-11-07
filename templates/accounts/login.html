@@ -1,0 +1,34 @@
+{% extends "base/accounts.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <a href="/" class="link-underline-primary">
+        <img class="mb-4" src="/media/images/logo.png" alt="" width="72" height="72">
+    </a>
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    {% include "base/alerts.html" %}
+    <div class="form-floating my-3">
+        <input type="email" name="email" required class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating my-3">
+        <input type="password" name="password" required class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="form-check text-start my-3">
+        <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            Remember me
+        </label>
+    </div>
+    <button class="btn btn-primary w-100 my-2" type="submit">Sign in</button>
+    <p class="fs-6 w-100 my-2" >New here? <a href="/accounts/create" class="link-underline-primary">Sign Up</a></p>
+</form>
+
+{% endblock %}

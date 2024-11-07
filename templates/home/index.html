@@ -1,0 +1,98 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block style %}
+<style>
+    .product-device {
+        position: absolute;
+        right: 10%;
+        bottom: -40%;
+        width: 300px;
+        height: 540px;
+        background-color: #333;
+        border-radius: 21px;
+        transform: rotate(30deg);
+    }
+
+    .product-device::before {
+        position: absolute;
+        top: 10%;
+        right: 10px;
+        bottom: 10%;
+        left: 10px;
+        content: "";
+        background-color: rgba(255, 255, 255, .1);
+        border-radius: 5px;
+    }
+
+    .product-device-2 {
+        top: -35%;
+        right: auto;
+        bottom: 0;
+        left: 5%;
+        background-color: #e5e5e5;
+    }
+
+    .zoom {
+        transition: transform .2s;
+        /* Animation */
+        width: 400px;
+        height: 400px;
+    }
+
+    .zoom:hover {
+        transform: scale(1.1);
+        /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<main>
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary">
+        <div class="col-md-6 p-lg-5 mx-auto my-5">
+            <h1 class="display-3 fw-bold">Witness Fluidity</h1>
+            <h3 class="fw-normal text-muted mt-4">Shop anything you want with Facebook</h3>
+        </div>
+        <div class="product-device shadow-sm d-none d-md-block"></div>
+        <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+    </div>
+
+    {% for product1,product2,bgcolor1,bgcolor2 in products %}
+    <div class="d-flex flex-md-equal justify-content-center mw-200 my-md-3 ps-md-3">
+        <div class="{{bgcolor1}} me-md-3 pt-3 px-3 pt-md-5 px-md-5 vw-100 text-center overflow-hidden">
+            <div class="my-3 py-3">
+                <h2 class="display-5">{{product1.product_name}}</h2>
+                <p class="lead">{{product1.category}}</p>
+            </div>
+            <a href="/product/{{product1.slug}}" class="link-underline-opacity-0 icon-link-hover"
+                style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);">
+                <div class="{{bgcolor2}} shadow-sm mx-auto p-3"
+                    style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+                    <img class="img-fluid my-3 zoom" src="/media/{{product1.product_images.first.image}}" width="400"
+                        height="400">
+                </div>
+            </a>
+        </div>
+        <div class="{{bgcolor2}} me-md-3 pt-3 px-3 pt-md-5 px-md-5 vw-100 text-center overflow-hidden">
+            <div class="my-3 p-3">
+                <h2 class="display-5">{{product2.product_name}}</h2>
+                <p class="lead">{{product2.category}}</p>
+            </div>
+            <a href="/product/{{product2.slug}}" class="link-underline-opacity-0">
+                <div class="{{bgcolor1}} shadow-sm mx-auto p-3"
+                    style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+                    <img class="img-fluid my-3 zoom" src="/media/{{product2.product_images.first.image}}" width="400"
+                        height="400">
+                </div>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</main>
+
+
+{% endblock %}
